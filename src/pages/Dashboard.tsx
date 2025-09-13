@@ -35,7 +35,17 @@ const Dashboard = () => {
         creditLoad: 360,
         modules: ["Financial Accounting", "Marketing Management", "Business Statistics", "Economics"],
         careerOpportunities: ["Accountant", "Marketing Manager", "Business Analyst", "Financial Advisor"],
-        programDirector: "Dr. Sarah Johnson"
+        programDirector: "Dr. Sarah Johnson",
+        matricRequirements: {
+          subjects: ["Mathematics", "English Home Language", "Accounting", "Economics"],
+          minimumPoints: 32,
+          subjectRequirements: [
+            { subject: "Mathematics", minimumMark: 60 },
+            { subject: "English Home Language", minimumMark: 50 },
+            { subject: "Accounting", minimumMark: 60 },
+            { subject: "Economics", minimumMark: 55 }
+          ]
+        }
       },
       {
         id: "2", 
@@ -46,7 +56,17 @@ const Dashboard = () => {
         creditLoad: 360,
         modules: ["Microeconomics", "Macroeconomics", "Econometrics", "Development Economics"],
         careerOpportunities: ["Economist", "Policy Analyst", "Research Consultant", "Banking Analyst"],
-        programDirector: "Prof. Michael Chen"
+        programDirector: "Prof. Michael Chen",
+        matricRequirements: {
+          subjects: ["Mathematics", "English Home Language", "Economics", "History or Geography"],
+          minimumPoints: 30,
+          subjectRequirements: [
+            { subject: "Mathematics", minimumMark: 65 },
+            { subject: "English Home Language", minimumMark: 50 },
+            { subject: "Economics", minimumMark: 60 },
+            { subject: "History or Geography", minimumMark: 50 }
+          ]
+        }
       },
       {
         id: "3",
@@ -57,7 +77,15 @@ const Dashboard = () => {
         creditLoad: 120, 
         modules: ["Strategic Management", "Advanced Finance", "Leadership Studies", "Research Methodology"],
         careerOpportunities: ["Business Consultant", "Senior Manager", "CEO", "Entrepreneur"],
-        programDirector: "Dr. Lisa Williams"
+        programDirector: "Dr. Lisa Williams",
+        matricRequirements: {
+          subjects: ["Bachelor's degree in relevant field", "Academic record evaluation"],
+          minimumPoints: "65% average in undergraduate degree",
+          subjectRequirements: [
+            { subject: "Undergraduate Business/Commerce degree", minimumMark: 65 },
+            { subject: "Research component or methodology course", minimumMark: 60 }
+          ]
+        }
       },
       {
         id: "4",
@@ -68,7 +96,16 @@ const Dashboard = () => {
         creditLoad: 180,
         modules: ["Executive Leadership", "Global Strategy", "Innovation Management", "Corporate Finance"],
         careerOpportunities: ["Executive Director", "Managing Director", "Chief Executive Officer", "Business Owner"],
-        programDirector: "Prof. David Brown"
+        programDirector: "Prof. David Brown",
+        matricRequirements: {
+          subjects: ["Honours degree or equivalent", "Work experience (3+ years)", "GMAT/GRE scores"],
+          minimumPoints: "60% average + professional experience",
+          subjectRequirements: [
+            { subject: "Honours degree in any field", minimumMark: 60 },
+            { subject: "Professional work experience", minimumMark: "3+ years management" },
+            { subject: "GMAT score", minimumMark: 550 }
+          ]
+        }
       },
       {
         id: "5",
@@ -79,7 +116,17 @@ const Dashboard = () => {
         creditLoad: 360,
         modules: ["Financial Accounting", "Management Accounting", "Auditing", "Taxation"],
         careerOpportunities: ["Chartered Accountant", "Auditor", "Tax Consultant", "CFO"],
-        programDirector: "Dr. Amanda Taylor"
+        programDirector: "Dr. Amanda Taylor",
+        matricRequirements: {
+          subjects: ["Mathematics", "English Home Language", "Accounting", "Economics or Business Studies"],
+          minimumPoints: 35,
+          subjectRequirements: [
+            { subject: "Mathematics", minimumMark: 70 },
+            { subject: "English Home Language", minimumMark: 60 },
+            { subject: "Accounting", minimumMark: 70 },
+            { subject: "Economics or Business Studies", minimumMark: 60 }
+          ]
+        }
       }
     ];
     

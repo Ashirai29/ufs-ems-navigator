@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { BookOpen, Clock, Award, TrendingUp, User, ChevronRight } from "lucide-react";
+import { BookOpen, Clock, Award, TrendingUp, User, ChevronRight, GraduationCap, Target } from "lucide-react";
 
 interface CourseCardProps {
   course: {
@@ -18,6 +18,14 @@ interface CourseCardProps {
     modules: string[];
     careerOpportunities: string[];
     programDirector: string;
+    matricRequirements: {
+      subjects: string[];
+      minimumPoints: string | number;
+      subjectRequirements: Array<{
+        subject: string;
+        minimumMark: number | string;
+      }>;
+    };
   };
   currentUser: any;
 }
@@ -40,6 +48,16 @@ export const CourseCard = ({ course, currentUser }: CourseCardProps) => {
         description: `You have unregistered from ${course.title}`,
       });
     } else {
+      // Check if user already has a registered course
+      if (updatedUser.registeredCourses && updatedUser.registeredCourses.length > 0) {
+        toast({
+          title: "Registration limit reached",
+          description: "You can only register for one course at a time. Please unregister from your current course first.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
       // Register
       if (!updatedUser.registeredCourses) {
         updatedUser.registeredCourses = [];
@@ -169,6 +187,46 @@ export const CourseCard = ({ course, currentUser }: CourseCardProps) => {
                 </div>
               </div>
               
+              <Separator />
+              
+              <div>
+                <h4 className="font-semibold mb-3 flex items-center">
+                  <GraduationCap className="w-4 h-4 mr-2 text-primary" />
+                  Matriculation Requirements
+                </h4>
+                <div className="space-y-3">
+                  <div className="p-3 bg-accent rounded-lg">
+                    <p className="text-sm font-medium mb-2">Required Subjects:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {course.matricRequirements.subjects.map((subject, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {subject}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="p-3 bg-accent rounded-lg">
+                    <p className="text-sm font-medium mb-2">
+                      <Target className="w-4 h-4 inline mr-1" />
+                      Minimum Points: {course.matricRequirements.minimumPoints}
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium">Subject Requirements:</p>
+                    {course.matricRequirements.subjectRequirements.map((req, index) => (
+                      <div key={index} className="flex justify-between items-center p-2 bg-muted rounded">
+                        <span className="text-xs font-medium">{req.subject}</span>
+                        <Badge variant="secondary" className="text-xs">
+                          {req.minimumMark}%
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
               <Separator />
               
               <div>

@@ -18,9 +18,11 @@ import {
   LogOut, 
   Bell,
   Menu,
-  X 
+  X,
+  FileText 
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface NavigationProps {
   currentUser: any;
@@ -45,6 +47,7 @@ export const Navigation = ({ currentUser }: NavigationProps) => {
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "Courses", href: "/courses", icon: BookOpen },
     { name: "Directors", href: "/directors", icon: Users },
+    { name: "Resources", href: "/resources", icon: FileText },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -78,6 +81,9 @@ export const Navigation = ({ currentUser }: NavigationProps) => {
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
             {/* Notifications */}
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="w-5 h-5" />
