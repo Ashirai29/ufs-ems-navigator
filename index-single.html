@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFS EMS Faculty Portal - University of the Free State</title>
+    <meta name="description" content="Official EMS Faculty portal for the University of the Free State. Access course information, connect with program directors, and manage your academic journey." />
+    <meta name="author" content="University of the Free State" />
+    <link rel="icon" type="image/png" href="https://www.ufs.ac.za/images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003D77;
+            --primary-dark: #002D59;
+            --secondary: #FFD100;
+            --background: #F8F9FA;
+            --card: #FFFFFF;
+            --text: #212529;
+            --text-secondary: #6C757D;
+            --border: #E9ECEF;
+            --success: #28A745;
+            --error: #DC3545;
+            --warning: #FFC107;
+            --info: #17A2B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(0, 61, 119, 0.1);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 70px;
+            min-height: calc(100vh - 120px);
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #0056b3);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 61, 119, 0.1);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: var(--card);
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: rgba(0, 61, 119, 0.1);
+            color: var(--primary);
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #121212;
+                --card: #1E1E1E;
+                --text: #E0E0E0;
+                --text-secondary: #A0A0A0;
+                --border: #333333;
+            }
+
+            .navbar {
+                background-color: #1E1E1E;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }
+
+            .nav-links a {
+                color: var(--text);
+            }
+
+            .feature-card {
+                background: #2D2D2D;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#/" class="logo">
+            <img src="https://www.ufs.ac.za/images/templates/ufs-logo.svg" alt="UFS Logo" height="40">
+            <span>EMS Navigator</span>
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="#/courses">Courses</a>
+            <a href="#/directors">Directors</a>
+            <a href="#/resources">Resources</a>
+        </div>
+        <div class="auth-buttons" id="authButtons">
+            <a href="#/login" class="btn btn-outline">Login</a>
+            <a href="#/signup" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="app">
+        <!-- Content will be dynamically inserted here -->
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--card); padding: 2rem; text-align: center; margin-top: 3rem;">
+        <p>© 2023 University of the Free State - EMS Faculty. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // State management
+        const state = {
+            currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
+            courses: [],
+            directors: [],
+            resources: []
+        };
+
+        // Router
+        const routes = {
+            '/': homePage,
+            '/login': loginPage,
+            '/signup': signupPage,
+            '/dashboard': dashboardPage,
+            '/courses': coursesPage,
+            '/directors': directorsPage,
+            '/resources': resourcesPage,
+            '/profile': profilePage
+        };
+
+        // Initialize the app
+        function init() {
+            window.addEventListener('popstate', render);
+            document.addEventListener('DOMContentLoaded', () => {
+                render();
+                loadInitialData();
+            });
+        }
+
+        // Render the current route
+        function render() {
+            const path = window.location.hash.slice(1) || '/';
+            const app = document.getElementById('app');
+            const handler = routes[path] || notFoundPage;
+            
+            // Add fade-out effect
+            if (app) {
+                app.style.opacity = '0';
+                setTimeout(() => {
+                    app.innerHTML = '';
+                    const content = handler();
+                    if (content) {
+                        app.appendChild(content);
+                        // Add fade-in effect
+                        setTimeout(() => {
+                            app.style.opacity = '1';
+                        }, 50);
+                    }
+                }, 200);
+            }
+        }
+
+        // Navigation
+        function navigateTo(path) {
+            window.location.hash = path;
+        }
+
+        // Load initial data
+        async function loadInitialData() {
+            // Simulate API calls
+            try {
+                // Load courses
+                const coursesResponse = await fetch('/api/courses');
+                state.courses = await coursesResponse.json();
+                
+                // Load directors
+                const directorsResponse = await fetch('/api/directors');
+                state.directors = await directorsResponse.json();
+                
+                // Load resources
+                const resourcesResponse = await fetch('/api/resources');
+                state.resources = await resourcesResponse.json();
+                
+                // Re-render if needed
+                render();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                // Use mock data if API fails
+                state.courses = [
+                    { id: 1, code: 'EMS101', name: 'Introduction to Economics', credits: 12 },
+                    { id: 2, code: 'EMS201', name: 'Business Management', credits: 16 },
+                    { id: 3, code: 'EMS301', name: 'Financial Accounting', credits: 16 }
+                ];
+                
+                state.directors = [
+                    { id: 1, name: 'Dr. John Smith', department: 'Economics', email: 'john.smith@ufs.ac.za' },
+                    { id: 2, name: 'Prof. Sarah Johnson', department: 'Business Management', email: 'sarah.j@ufs.ac.za' },
+                    { id: 3, name: 'Dr. Michael Brown', department: 'Accounting', email: 'michael.b@ufs.ac.za' }
+                ];
+                
+                state.resources = [
+                    { id: 1, title: 'Academic Calendar', type: 'PDF', url: '#' },
+                    { id: 2, title: 'Student Handbook', type: 'PDF', url: '#' },
+                    { id: 3, title: 'Research Guidelines', type: 'PDF', url: '#' }
+                ];
+                
+                render();
+            }
+        }
+
+        // Page components
+        function homePage() {
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.innerHTML = `
+                <section class="hero">
+                    <h1>Welcome to UFS EMS Faculty</h1>
+                    <p>Your gateway to academic excellence and career success in Economic and Management Sciences</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <a href="#/login" class="btn btn-primary">Login</a>
+                        <a href="#/signup" class="btn btn-outline" style="color: white; border-color: white;">Sign Up</a>
+                    </div>
+                </section>
+                
+                <section class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Course Prospectus</h3>
+                        <p>Explore all EMS courses and programs with detailed information</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>Program Directors</h3>
+                        <p>Connect with program directors for guidance and support</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📅</div>
+                        <h3>Meeting Scheduling</h3>
+                        <p>Book appointments with directors and academic staff</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎓</div>
+                        <h3>Academic Excellence</h3>
+                        <p>Join UFS EMS Faculty for world-class education</p>
+                    </div>
+                </section>
+            `;
+            return div;
+        }
+
+        function loginPage() {
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.style.maxWidth = '500px';
+            div.style.margin = '0 auto';
+            div.style.padding = '2rem';
+            div.style.background = 'var(--card)';
+            div.style.borderRadius = '8px';
+            div.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)';
+            
+            div.innerHTML = `
+                <h2 style="text-align: center; margin-bottom: 2rem;">Login to Your Account</h2>
+                <form id="loginForm" onsubmit="return handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email" style="display: block; margin-bottom: 0.5rem;">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="display: block; margin-bottom: 0.5rem;">Password</label>
+                        <input type="password" id="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Login
+                    </button>
+                </form>
+                <p style="text-align: center; margin-top: 1.5rem;">
+                    Don't have an account? <a href="#/signup" style="color: var(--primary);">Sign up</a>
+                </p>
+            `;
+            
+            return div;
+        }
+
+        function signupPage() {
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.style.maxWidth = '500px';
+            div.style.margin = '0 auto';
+            div.style.padding = '2rem';
+            div.style.background = 'var(--card)';
+            div.style.borderRadius = '8px';
+            div.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)';
+            
+            div.innerHTML = `
+                <h2 style="text-align: center; margin-bottom: 2rem;">Create an Account</h2>
+                <form id="signupForm" onsubmit="return handleSignup(event)">
+                    <div class="form-group">
+                        <label for="fullName" style="display: block; margin-bottom: 0.5rem;">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail" style="display: block; margin-bottom: 0.5rem;">Email</label>
+                        <input type="email" id="signupEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword" style="display: block; margin-bottom: 0.5rem;">Password</label>
+                        <input type="password" id="signupPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword" style="display: block; margin-bottom: 0.5rem;">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Create Account
+                    </button>
+                </form>
+                <p style="text-align: center; margin-top: 1.5rem;">
+                    Already have an account? <a href="#/login" style="color: var(--primary);">Login</a>
+                </p>
+            `;
+            
+            return div;
+        }
+
+        function dashboardPage() {
+            if (!state.currentUser) {
+                navigateTo('/login');
+                return document.createElement('div');
+            }
+            
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.innerHTML = `
+                <h2>Welcome, ${state.currentUser.name || 'Student'}</h2>
+                <div class="dashboard">
+                    <div class="sidebar">
+                        <ul class="sidebar-nav">
+                            <li><a href="#/dashboard" class="active">Dashboard</a></li>
+                            <li><a href="#/courses">My Courses</a></li>
+                            <li><a href="#/directors">Program Directors</a></li>
+                            <li><a href="#/resources">Resources</a></li>
+                            <li><a href="#/profile">My Profile</a></li>
+                            <li><a href="#" onclick="handleLogout()">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="main-content">
+                        <div class="feature-card">
+                            <h3>Upcoming Deadlines</h3>
+                            <p>No upcoming deadlines</p>
+                        </div>
+                        <div class="feature-card" style="margin-top: 1rem;">
+                            <h3>Recent Activities</h3>
+                            <p>No recent activities</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return div;
+        }
+
+        function coursesPage() {
+            if (!state.currentUser) {
+                navigateTo('/login');
+                return document.createElement('div');
+            }
+            
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2>Available Courses</h2>
+                    <button class="btn btn-primary" onclick="navigateTo('/courses/register')">Register for Courses</button>
+                </div>
+                <div class="features">
+                    ${state.courses.map(course => `
+                        <div class="feature-card">
+                            <h3>${course.code} - ${course.name}</h3>
+                            <p>Credits: ${course.credits}</p>
+                            <button class="btn btn-outline" style="margin-top: 1rem;" 
+                                    onclick="registerForCourse(${course.id})">
+                                Register
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            return div;
+        }
+
+        function directorsPage() {
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.innerHTML = `
+                <h2>Program Directors</h2>
+                <p style="margin-bottom: 2rem;">Contact our program directors for academic guidance and support.</p>
+                <div class="features">
+                    ${state.directors.map(director => `
+                        <div class="feature-card">
+                            <h3>${director.name}</h3>
+                            <p>Department: ${director.department}</p>
+                            <p>Email: <a href="mailto:${director.email}" style="color: var(--primary);">${director.email}</a></p>
+                            <button class="btn btn-outline" style="margin-top: 1rem;" 
+                                    onclick="scheduleMeeting(${director.id})">
+                                Schedule Meeting
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            return div;
+        }
+
+        function resourcesPage() {
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.innerHTML = `
+                <h2>Academic Resources</h2>
+                <p style="margin-bottom: 2rem;">Access important academic resources and documents.</p>
+                <div class="features">
+                    ${state.resources.map(resource => `
+                        <div class="feature-card">
+                            <h3>${resource.title}</h3>
+                            <p>Type: ${resource.type}</p>
+                            <a href="${resource.url}" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">
+                                Download
+                            </a>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            return div;
+        }
+
+        function profilePage() {
+            if (!state.currentUser) {
+                navigateTo('/login');
+                return document.createElement('div');
+            }
+            
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.style.maxWidth = '600px';
+            div.style.margin = '0 auto';
+            div.style.padding = '2rem';
+            div.style.background = 'var(--card)';
+            div.style.borderRadius = '8px';
+            div.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)';
+            
+            div.innerHTML = `
+                <h2 style="text-align: center; margin-bottom: 2rem;">My Profile</h2>
+                <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        ${state.currentUser.name ? state.currentUser.name.charAt(0).toUpperCase() : 'U'}
+                    </div>
+                    <div>
+                        <h3>${state.currentUser.name || 'User'}</h3>
+                        <p>${state.currentUser.email || ''}</p>
+                    </div>
+                </div>
+                <form id="profileForm" onsubmit="return updateProfile(event)">
+                    <div class="form-group">
+                        <label for="profileName" style="display: block; margin-bottom: 0.5rem;">Full Name</label>
+                        <input type="text" id="profileName" class="form-control" value="${state.currentUser.name || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail" style="display: block; margin-bottom: 0.5rem;">Email</label>
+                        <input type="email" id="profileEmail" class="form-control" value="${state.currentUser.email || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentPassword" style="display: block; margin-bottom: 0.5rem;">Current Password</label>
+                        <input type="password" id="currentPassword" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword" style="display: block; margin-bottom: 0.5rem;">New Password</label>
+                        <input type="password" id="newPassword" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Update Profile
+                    </button>
+                </form>
+            `;
+            
+            return div;
+        }
+
+        function notFoundPage() {
+            const div = document.createElement('div');
+            div.className = 'fade-in';
+            div.style.textAlign = 'center';
+            div.style.padding = '4rem 2rem';
+            div.innerHTML = `
+                <h1>404 - Page Not Found</h1>
+                <p style="margin: 1rem 0 2rem;">The page you are looking for does not exist or has been moved.</p>
+                <a href="#/" class="btn btn-primary">Go to Homepage</a>
+            `;
+            return div;
+        }
+
+        // Auth handlers
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simulate API call
+            setTimeout(() => {
+                state.currentUser = {
+                    id: 1,
+                    name: 'John Doe',
+                    email: email,
+                    role: 'student'
+                };
+                localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
+                updateAuthUI();
+                navigateTo('/dashboard');
+            }, 500);
+            
+            return false;
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return false;
+            }
+            
+            // Simulate API call
+            setTimeout(() => {
+                state.currentUser = {
+                    id: 1,
+                    name: name,
+                    email: email,
+                    role: 'student'
+                };
+                localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
+                updateAuthUI();
+                navigateTo('/dashboard');
+            }, 500);
+            
+            return false;
+        }
+
+        function handleLogout() {
+            state.currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateAuthUI();
+            navigateTo('/');
+        }
+
+        function updateAuthUI() {
+            const authButtons = document.getElementById('authButtons');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (state.currentUser) {
+                authButtons.innerHTML = `
+                    <a href="#/profile" class="btn btn-outline">My Profile</a>
+                    <a href="#" class="btn btn-primary" onclick="handleLogout()">Logout</a>
+                `;
+                
+                if (navLinks) {
+                    navLinks.style.display = 'flex';
+                }
+            } else {
+                authButtons.innerHTML = `
+                    <a href="#/login" class="btn btn-outline">Login</a>
+                    <a href="#/signup" class="btn btn-primary">Sign Up</a>
+                `;
+                
+                if (navLinks) {
+                    navLinks.style.display = 'none';
+                }
+            }
+        }
+
+        // Other handlers
+        function registerForCourse(courseId) {
+            if (!state.currentUser) {
+                navigateTo('/login');
+                return;
+            }
+            
+            const course = state.courses.find(c => c.id === courseId);
+            if (course) {
+                alert(`Successfully registered for ${course.code} - ${course.name}`);
+            }
+        }
+
+        function scheduleMeeting(directorId) {
+            if (!state.currentUser) {
+                navigateTo('/login');
+                return;
+            }
+            
+            const director = state.directors.find(d => d.id === directorId);
+            if (director) {
+                alert(`Meeting scheduled with ${director.name}`);
+            }
+        }
+
+        function updateProfile(e) {
+            e.preventDefault();
+            const name = document.getElementById('profileName').value;
+            const email = document.getElementById('profileEmail').value;
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            
+            // Simulate API call
+            setTimeout(() => {
+                state.currentUser = {
+                    ...state.currentUser,
+                    name: name,
+                    email: email
+                };
+                
+                if (newPassword) {
+                    // Update password logic would go here
+                    alert('Profile and password updated successfully');
+                } else {
+                    alert('Profile updated successfully');
+                }
+                
+                localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
+                updateAuthUI();
+            }, 500);
+            
+            return false;
+        }
+
+        // Make functions available globally
+        window.handleLogin = handleLogin;
+        window.handleSignup = handleSignup;
+        window.handleLogout = handleLogout;
+        window.navigateTo = navigateTo;
+        window.registerForCourse = registerForCourse;
+        window.scheduleMeeting = scheduleMeeting;
+        window.updateProfile = updateProfile;
+
+        // Initialize the app
+        init();
+        updateAuthUI();
+    </script>
+</body>
+</html>

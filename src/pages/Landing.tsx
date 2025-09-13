@@ -48,7 +48,7 @@ const Landing = () => {
                 </Button>
               </Link>
               <Link to="/signup">
-                <Button size="lg" variant="outline" className="min-w-32 border-white text-white hover:bg-white hover:text-primary">
+                <Button size="lg" variant="secondary" className="min-w-32">
                   Sign Up
                 </Button>
               </Link>

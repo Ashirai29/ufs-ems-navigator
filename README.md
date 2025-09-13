@@ -1,73 +1,257 @@
-# Welcome to your Lovable project
+# UFS EMS Navigator
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/104dff29-e106-4a8a-b779-db71a6ba6936
+The UFS EMS Navigator is a comprehensive web portal designed for the University of the Free State's Economic and Management Sciences (EMS) Faculty. This responsive, user-friendly interface serves as a central hub for students, faculty, and staff to access academic resources, course information, and faculty directories.
 
-## How can I edit this code?
+## Design & User Interface
 
-There are several ways of editing your application.
+### Color Scheme
+- **Primary Color**: UFS Blue (#003D77) - Used for headers, primary buttons, and important call-to-action elements
+- **Secondary Color**: UFS Yellow (#FFD100) - Used for highlights, accents, and secondary buttons
+- **Background**: Light gray (#F8F9FA) for content areas, white (#FFFFFF) for cards and containers
+- **Text**: Dark gray (#212529) for body text, slightly lighter gray (#6C757D) for secondary text
 
-**Use Lovable**
+### Typography
+- **Primary Font**: 'Roboto', sans-serif - Clean and highly readable for body text
+- **Secondary Font**: 'Montserrat', sans-serif - Used for headings and navigation
+- **Base Font Size**: 16px with responsive scaling
+- **Line Height**: 1.6 for optimal readability
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/104dff29-e106-4a8a-b779-db71a6ba6936) and start prompting.
+### Layout
+1. **Header**
+   - Fixed position for easy navigation
+   - UFS logo on the left
+   - Main navigation menu with dropdowns
+   - Mobile-responsive hamburger menu
 
-Changes made via Lovable will be committed automatically to this repo.
+2. **Hero Section**
+   - Full-width banner with gradient overlay
+   - Clear value proposition
+   - Prominent call-to-action buttons
 
-**Use your preferred IDE**
+3. **Features Section**
+   - Grid layout of feature cards
+   - Icons for visual appeal
+   - Hover effects for interactivity
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+4. **Footer**
+   - Quick links to important pages
+   - Contact information
+   - Social media links
+   - Copyright information
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Core Features
 
-Follow these steps:
+### 1. Course Prospectus
+- Searchable database of all EMS courses
+- Filter by department, level, and semester
+- Detailed course descriptions and prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 2. Faculty Directory
+- Searchable directory of faculty members
+- Filter by department or research area
+- Contact information and office hours
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 3. Student Dashboard
+- Personalized course schedule
+- Upcoming deadlines and events
+- Quick access to learning materials
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 4. Appointment Scheduling
+- Calendar integration for faculty meetings
+- Automated email confirmations
+- Reminder notifications
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+## Technical Implementation
+
+### HTML Structure
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFS EMS Navigator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <!-- Navigation content -->
+    </header>
+    
+    <main>
+        <section class="hero">
+            <!-- Hero content -->
+        </section>
+        
+        <section class="features">
+            <!-- Features grid -->
+        </section>
+        
+        <!-- Additional sections -->
+    </main>
+    
+    <footer class="main-footer">
+        <!-- Footer content -->
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
 ```
 
-**Edit a file directly in GitHub**
+### CSS Architecture
+```css
+/* Base Styles */
+:root {
+    --primary-color: #003D77;
+    --secondary-color: #FFD100;
+    --text-dark: #212529;
+    --text-light: #6C757D;
+    --background-light: #F8F9FA;
+}
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+/* Typography */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--background-light);
+}
 
-**Use GitHub Codespaces**
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+/* Layout Components */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 
-## What technologies are used for this project?
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
 
-This project is built with:
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+.btn-primary:hover {
+    background-color: #002D59;
+    transform: translateY(-2px);
+}
+```
 
-## How can I deploy this project?
+### JavaScript Functionality
+```javascript
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.main-nav');
+    
+    menuButton.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        this.classList.toggle('open');
+    });
+    
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
 
-Simply open [Lovable](https://lovable.dev/projects/104dff29-e106-4a8a-b779-db71a6ba6936) and click on Share -> Publish.
+// Form Validation
+function validateForm(form) {
+    const email = form.querySelector('input[type="email"]');
+    const password = form.querySelector('input[type="password"]');
+    let isValid = true;
+    
+    if (!email.value.includes('@')) {
+        showError(email, 'Please enter a valid email address');
+        isValid = false;
+    }
+    
+    if (password.value.length < 8) {
+        showError(password, 'Password must be at least 8 characters');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Responsive Design
+- Mobile-first approach using CSS Grid and Flexbox
+- Media queries for different screen sizes
+- Responsive typography using viewport units
+- Touch-friendly navigation elements
 
-Yes, you can!
+## Performance Optimization
+- Minified CSS and JavaScript files
+- Optimized images with WebP format
+- Lazy loading for below-the-fold content
+- Caching strategy for static assets
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Accessibility
+- Semantic HTML5 elements
+- ARIA labels and roles
+- Keyboard navigation support
+- Sufficient color contrast
+- Screen reader compatibility
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Browser Support
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+- Mobile Safari (iOS 12+)
+- Chrome for Android
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/ufs-ems-navigator.git
+   cd ufs-ems-navigator
+   ```
+
+2. Open `index.html` in your preferred web browser
+
+3. For development, use a local server:
+   ```bash
+   # Using Python's built-in server
+   python -m http.server 8000
+   ```
+   Then visit `http://localhost:8000` in your browser.
+
+## Deployment
+
+Simply upload all files to your web server. The application is completely static and doesn't require server-side processing.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+- University of the Free State for the brand assets
+- Google Fonts for the typography
+- All contributors who helped build this platform
