@@ -1,4 +1,4 @@
-# UFS EMS Navigator
+# UFS EMS Navigator Website Assignment
 
 ## Project Overview
 
